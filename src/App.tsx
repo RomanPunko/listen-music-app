@@ -1,13 +1,13 @@
 import './styles/index.css'
-import  Layout  from './layouts/Layout'
+import AppRouters from './routers/AppRouters'
 import { BrowserRouter } from 'react-router-dom'
 
-
+ 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <Layout/>
+        <AppRouters/>
       </BrowserRouter>
     </>
   )

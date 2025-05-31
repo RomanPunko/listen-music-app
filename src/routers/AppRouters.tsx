@@ -1,8 +1,9 @@
+import { type FC } from 'react'; 
 import { Routes, Route, Navigate } from 'react-router-dom';
 import RegistrationPage from '@/pages/RegistrationPage';
 import LoginPage from '@/pages/LoginPage';
 
-const Layout = () => {
+const AppRouters:FC = () => {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/registration" replace />} />
@@ -12,4 +13,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default AppRouters;
