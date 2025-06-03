@@ -10,7 +10,7 @@ import { useAppDispatch } from '@/hooks/app-hooks';
 import { setIsAuthenticated } from '@/store/slices/user-slice';
 
 const RegistrationForm: FC = () => {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const [apiError, setApiError] = useState<string | null>(null);
   const [formData, setFormData] = useState<IFormData>({
     email: '',
@@ -34,7 +34,7 @@ const RegistrationForm: FC = () => {
     try {
       const response = await AuthService.register(formData.email, formData.password);
       if (response.data.accessToken) console.log('Hello new Roman');
-      await dispatch(setIsAuthenticated(true))
+      await dispatch(setIsAuthenticated(true));
       await goToHomePage(); // запитати
     } catch (error: any) {
       console.error('Помилка:', error);

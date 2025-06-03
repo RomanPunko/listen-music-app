@@ -1,9 +1,9 @@
-import Header from '@/components/header/Header.js';
+import { type FC } from 'react';
 
-const HomePage = () => {
+const HomePage: FC = () => {
   return (
-    <div className='bg-primary h-screen text-text'>
-      <Header />
+    <div className="w-full">
+      123123
     </div>
   );
 };

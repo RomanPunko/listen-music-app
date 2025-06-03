@@ -10,7 +10,7 @@ import { useAppDispatch } from '@/hooks/app-hooks';
 import { setIsAuthenticated } from '@/store/slices/user-slice';
 
 const LoginForm: FC = () => {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const [apiError, setApiError] = useState<string | null>(null);
   const [formData, setFormData] = useState<IFormData>({
     email: '',
@@ -23,7 +23,7 @@ const LoginForm: FC = () => {
     try {
       const response = await AuthService.login(formData.email, formData.password);
       if (response.data.accessToken) console.log('Hello Roman');
-      await dispatch(setIsAuthenticated(true))
+      await dispatch(setIsAuthenticated(true));
       await goToHomePage();
     } catch (error: any) {
       console.error('Помилка:', error);

@@ -1,20 +1,20 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 @theme inline {
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
   --color-border: var(--border);
-  --color-input: var(--input);
   --color-text: var(--text);
 }
 
 :root {
   --primary: #222;
   --secondary: #111;
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
+  --border: #fff;
   --text: #fff;
+  
 }
 
 input:-webkit-autofill,
@@ -40,3 +40,8 @@ input:-webkit-autofill:active {
   animation: fadeIn 3s ease-out forwards;
   opacity: 0;
 }
+
+/* .outline-text {
+  color: transparent;
+  -webkit-text-stroke: 0.6px #fff;
+} */
