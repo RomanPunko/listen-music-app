@@ -3,11 +3,12 @@ import { useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Link } from 'react-router-dom';
-import type { IFormData } from '@/types/auth-form-types';
 import { useAppDispatch } from '@/hooks/app-hooks';
 import { useAppSelector } from '@/hooks/app-hooks';
 import { useAuthRedirect } from '@/hooks/useAuthRedirect';
 import { loginUser } from '@/store/slices/auth-slice';
+import { type IFormData } from '@/store/slices/auth-slice';
+
 
 const LoginForm: React.FC = () => {
   const loading = useAppSelector((state) => state.auth.loading);
@@ -22,12 +23,12 @@ const LoginForm: React.FC = () => {
   } = useForm<IFormData>();
 
   const onSubmit = async (data: IFormData) => {
-    const resultLogin = await dispatch(loginUser({ email: data.email, password: data.password }));
+    const resultLogin = await dispatch(loginUser(data));
 
     if (loginUser.rejected.match(resultLogin)) {
       setError('root', {
         type: 'manual',
-        message: String(resultLogin.payload) || 'Registration failed',
+        message: String(resultLogin.payload) || 'Login failed',
       });
     }
   };
