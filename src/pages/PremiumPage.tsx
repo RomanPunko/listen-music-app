@@ -1,7 +1,7 @@
 import { type FC } from 'react';
 
 
-export const SearchPage: FC = () => {
+export const PremiumPage: FC = () => {
   return (
     <div className="">
 111111
@@ -9,4 +9,4 @@ export const SearchPage: FC = () => {
   );
 };
 
-export default SearchPage;
+export default PremiumPage;
