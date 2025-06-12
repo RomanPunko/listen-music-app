@@ -1,29 +1,23 @@
 import { type FC } from 'react';
-import AddAvatar from './AddAvatar';
-import { IoIosLogOut } from 'react-icons/io';
-import { useNavigate } from 'react-router-dom';
-import { removeFromStorage } from '@/api/services/auth/auth-helper';
-import { useAppDispatch } from '@/hooks/app-hooks';
-import { setIsAuthenticated } from '@/store/slices/auth-slice';
+import { Input } from '@/components/ui/input';
+import { IoSearchSharp } from 'react-icons/io5';
+import { LuCast } from 'react-icons/lu';
+import UserMenu from './UserMenu';
 
 const Header: FC = () => {
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    dispatch(setIsAuthenticated(false))
-    removeFromStorage()
-    navigate('/login');
-  };
-
   return (
-    <div className="flex items-center justify-between pt-2 pb-3 pl-4 pr-4 bg-secondary relative border-b-1 border-border/30">
-      <p className="text-4xl font-bold">LISTEN</p>
-      <div className="flex items-center gap-5">
-        <AddAvatar />
-        <div className=" p-1 hover:bg-white/20 hover:rounded-[10px] cursor-pointer">
-          <IoIosLogOut size={36} onClick={handleLogout}/>
-        </div>
+    <div className="flex items-center justify-between pl-4 pb-2 pt-2 pr-2 relative">
+      <Input
+        className="w-[30%] rounded-4xl bg-white/10 border-0 focus-visible:ring-1 pl-8"
+        placeholder="What do you want to play?"
+      />
+      <IoSearchSharp className="absolute left-6 top-1/2 -translate-y-1/2 text-white/60" />
+      <div className="flex items-center gap-3 ">
+        <LuCast
+          size={36}
+          className="stroke-[1.5px] p-1.5 hover:bg-white/10 hover:rounded-[10px] cursor-pointer"
+        />
+        <UserMenu />
       </div>
     </div>
   );
