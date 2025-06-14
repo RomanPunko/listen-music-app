@@ -1,16 +1,17 @@
 import { type FC } from 'react';
 import SideBarItem from './SideBarItem';
 import { TiHome } from "react-icons/ti";
-import { IoSearchSharp } from "react-icons/io5";
+import { FaCrown } from "react-icons/fa";
 import { MdFavorite } from "react-icons/md";
 
 const SideBar: FC = () => {
   return (
-    <div className="bg-secondary text-xl flex flex-col w-[200px] h-full border-r-1 border-border/30 ">
+    <div className="bg-secondary text-[18px] flex flex-col min-w-[160px] h-full border-r-1 border-border/30 ">
+      <p className="text-3xl font-bold p-3 ">LISTEN</p>
       <div className="flex flex-col flex-grow">
         <SideBarItem to="/home" icon={TiHome} label="Home" />
-        <SideBarItem to="/search" icon={IoSearchSharp} label="Search" />
         <SideBarItem to="/favorite" icon={MdFavorite} label="Favorites" />
+        <SideBarItem to="/premium" icon={FaCrown} label="Premium" />
       </div>
     </div>
   );

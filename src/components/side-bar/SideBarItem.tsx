@@ -13,14 +13,14 @@ const SideBarItem: FC<INavItemProps> = ({ to, icon: Icon, label }) => {
   const isActive = location.pathname === to;
 
   return (
-    <div className="flex items-center w-full">
+    <div className="flex items-center justify-center w-full">
       <Link
         to={to}
         className={`flex gap-2 items-center w-full py-5 pl-3 active:bg-white/10 ${
           isActive ? 'bg-white/10 ' : 'hover:bg-white/5'
         }`}
       >
-        <Icon size={24}/>
+        <Icon size={22}/>
         <p>{label}</p>
       </Link>
     </div>

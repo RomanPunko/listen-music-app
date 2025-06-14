@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import RegistrationPage from '@/pages/RegistrationPage';
 import LoginPage from '@/pages/LoginPage';
 import HomePage from '@/pages/HomePage';
-import SearchPage from '@/pages/SearchPage';
+import PremiumPage from '@/pages/PremiumPage';
 import FavoritePage from '@/pages/FavoritePage';
 import Layout from '@/components/layout/Layout';
 
@@ -22,10 +22,10 @@ const AppRouters: FC = () => {
         }
       />
       <Route
-        path="/search"
+        path="/premium"
         element={
           <Layout>
-            <SearchPage />
+            <PremiumPage />
           </Layout>
         }
       />
