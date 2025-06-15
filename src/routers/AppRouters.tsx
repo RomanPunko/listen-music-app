@@ -6,6 +6,7 @@ import HomePage from '@/pages/HomePage';
 import PremiumPage from '@/pages/PremiumPage';
 import FavoritePage from '@/pages/FavoritePage';
 import Layout from '@/components/layout/Layout';
+import PlaylistPage from '@/pages/PlaylistPage';
 
 const AppRouters: FC = () => {
   return (
@@ -34,6 +35,14 @@ const AppRouters: FC = () => {
         element={
           <Layout>
             <FavoritePage />
+          </Layout>
+        }
+      />
+      <Route
+        path="/playlist/:id"
+        element={
+          <Layout>
+            <PlaylistPage />
           </Layout>
         }
       />

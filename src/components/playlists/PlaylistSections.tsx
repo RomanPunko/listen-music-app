@@ -2,6 +2,7 @@ import { type FC, useEffect } from 'react';
 import PlaylistsRow from './PlaylistsRow';
 import { useAppDispatch, useAppSelector } from '@/hooks/app-hooks';
 import { getPlaylists } from '@/store/slices/playlist-slice';
+import { LoadingSpinner } from '../ui/spinner';
 
 const PlaylistSections: FC = () => {
   const dispatch = useAppDispatch();
@@ -11,8 +12,18 @@ const PlaylistSections: FC = () => {
     dispatch(getPlaylists());
   }, [dispatch]);
 
-  if (loading) return <p>Завантаження плейлистів...</p>;
-  if (error) return <p>Помилка: {error}</p>;
+  if (loading)
+    return (
+      <div className="absolute left-1/2 top-[150%] transform -translate-x-1/2 -translate-y-1/2">
+        <LoadingSpinner />
+      </div>
+    );
+  if (error)
+    return (
+      <div className="absolute left-1/2 top-[150%] transform -translate-x-1/2 -translate-y-1/2">
+        <p>ERROR</p>
+      </div>
+    );
 
   const popularArtistsPlaylists = playlists.filter(
     (playlist) => playlist.category === 'popular artists'
