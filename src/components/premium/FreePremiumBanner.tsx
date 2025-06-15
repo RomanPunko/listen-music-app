@@ -17,7 +17,7 @@ const FreePremiumBanner: FC = () => {
     <div
       className="relative w-full flex items-center justify-between p-4 md:p-6
                  bg-gradient-to-r from-purple-700 to-pink-600 text-text
-                 rounded-xl shadow-lg overflow-hidden mb-4"
+                 rounded-xl shadow-lg overflow-hidden mb-2"
     >
       <div className="flex flex-col md:flex-row md:items-center w-full">
         <div className="flex-grow pr-4 mb-4 md:mb-0">

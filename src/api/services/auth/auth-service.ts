@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import type { IAuthResponse } from '@/api/data-types/data-types';
+import type { IAuthResponse } from '@/api/data-types/user-data-types';
 import { getContentType } from '@/api/api-helper';
 import { saveToStorage } from './auth-helper';
 

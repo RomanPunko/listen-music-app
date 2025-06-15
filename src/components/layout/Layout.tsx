@@ -9,16 +9,18 @@ interface ILayoutProps {
 
 const Layout: React.FC<ILayoutProps> = ({ children }) => {
   return (
-<div className="h-screen flex flex-col bg-primary text-text">
-  <div className="flex flex-grow">
-    <SideBar/>
-    <div className="flex flex-col flex-grow">
-      <Header />
-      <main className="flex-grow overflow-y-auto p-5 pt-0">{children}</main>
+    <div className="flex flex-col bg-primary text-text relative">
+      <div className="flex flex-grow h-screen">
+        <SideBar />
+        <div className="flex flex-col flex-grow">
+          <Header />
+          <main className="flex-grow overflow-y-auto p-5 pt-0">{children}</main>
+        </div>
+      </div>
+      <div className='absolute w-full bottom-0'>
+        <AudioPlayer />
+      </div>
     </div>
-  </div>
-  <AudioPlayer />
-</div>
   );
 };
 

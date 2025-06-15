@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie';
-import type { IAuthResponse, ITokens } from '@/api/data-types/data-types';
+import type { IAuthResponse, ITokens } from '@/api/data-types/user-data-types';
 
 export const getAccessToken = () => {
   const accessToken = Cookies.get('accessToken');

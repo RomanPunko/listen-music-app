@@ -1,15 +1,15 @@
 import { type FC } from 'react';
 import GenreFilters from '@/components/genre-filters/GenreFilters';
 import FreePremiumBanner from '@/components/premium/FreePremiumBanner';
-import PlaylistsRow from '@/components/playlist/PlaylistsRow';
+import PlaylistSections from '@/components/playlists/PlaylistSections';
 
 const HomePage: FC = () => {
 
   return (
-    <div className="w-full">
+    <div className="w-full pb-[80px] ">
       <GenreFilters/>
       <FreePremiumBanner/>
-      <PlaylistsRow/>
+      <PlaylistSections/>
     </div>
   );
 };

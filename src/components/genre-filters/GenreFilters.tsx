@@ -12,6 +12,7 @@ const GenreFilters: FC = () => {
       <GenreFiltersItem genre={"Hip-Hop"} />
       <GenreFiltersItem genre={"Jazz"} />
       <GenreFiltersItem genre={"Classical"} />
+      <GenreFiltersItem genre={"Country"} />
     </div>
   );
 };
