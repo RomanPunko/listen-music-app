@@ -7,10 +7,8 @@ export const PlaylistService = async () => {
     const response = await axios.get<IAllPlaylists>(
       import.meta.env.VITE_API_URL + '/playlists'
     );
-    console.log(response)
     return response;
   } catch (error: any) {
     throw new Error(errorCatch(error));
   }
 };
-PlaylistService()
