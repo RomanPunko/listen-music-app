@@ -12,6 +12,7 @@ import { type IFormData } from '@/store/slices/auth-slice';
 const RegistrationForm: FC = () => {
   const dispatch = useAppDispatch();
   const loading = useAppSelector((state) => state.auth.loading);
+  const error = useAppSelector((state) => state.auth.error);
 
   const {
     register,
@@ -94,8 +95,8 @@ const RegistrationForm: FC = () => {
         {loading ? 'Loading...' : 'Sign Up'}
       </Button>
 
-      {errors.root && (
-        <div className="text-red-500 text-center text-sm">{errors.root.message}</div>
+      {(errors.root || error) && (
+        <div className="text-red-500 text-center text-sm">{errors.root?.message || error}</div>
       )}
 
       <Link
