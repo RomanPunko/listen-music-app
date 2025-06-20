@@ -1,7 +1,7 @@
 import { type FC, useEffect } from 'react';
 import PlaylistsRow from './PlaylistsRow';
 import { useAppDispatch, useAppSelector } from '@/hooks/app-hooks';
-import { getPlaylists } from '@/store/slices/playlist-slice';
+import { getPlaylists } from '@/store/slices/playlists-data-slice';
 import { LoadingSpinner } from '../ui/spinner';
 
 const PlaylistSections: FC = () => {

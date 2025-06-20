@@ -30,7 +30,7 @@ const PlaylistsRow: FC<IPlaylistsRowProps> = ({ playlists, category }) => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <div className="absolute bottom-[-30px] left-1/2 -translate-x-1/2 flex gap-4 mt-4">
+        <div className="absolute top-0 mt-[-24px] right-12">
           <CarouselPrevious className="cursor-pointer" />
           <CarouselNext className="cursor-pointer" />
         </div>
