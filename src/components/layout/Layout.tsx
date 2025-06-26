@@ -14,7 +14,7 @@ const Layout: React.FC<ILayoutProps> = ({ children }) => {
         <SideBar />
         <div className="flex flex-col flex-grow">
           <Header />
-          <main className="flex-grow overflow-y-auto p-5 pt-0">{children}</main>
+          <main className="flex-grow overflow-y-auto p-5 pt-0 pl-4">{children}</main>
         </div>
       </div>
       <div className='absolute w-full bottom-0'>

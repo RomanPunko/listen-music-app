@@ -6,7 +6,7 @@ import UserMenu from './UserMenu';
 
 const Header: FC = () => {
   return (
-    <div className="flex items-center justify-between pl-4 pb-2 pt-2 pr-2 relative">
+    <div className="flex items-center justify-between pl-4 pb-2 pt-2 pr-2 relative select-none">
       <Input
         className="w-[30%] rounded-4xl bg-white/10 border-0 focus-visible:ring-1 pl-8"
         placeholder="What do you want to play?"

@@ -42,7 +42,7 @@ const PlaylistPage: FC = () => {
   const playlistSongs = songs.filter((song) => song.artist == playlist.artist)
 
   return (
-    <div className="w-full overflow-y-auto pb-[80px] pt-2 h-full">
+    <div className="w-full overflow-y-auto pb-[80px] pt-2 h-full select-none">
       <div className=" border-b border-border/30 flex gap-6 text-3xl pb-4">
         <div className="relative">
           <img

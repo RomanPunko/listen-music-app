@@ -17,8 +17,8 @@ const GenreFiltersItem: FC<IGenreItemProps> = ({ genre }) => {
       onClick={handleClick}
       className={
         isActive
-          ? 'bg-white/40 rounded-xl cursor-pointer hover:bg-white/50 h-7 pr-3 pl-3'
-          : 'bg-white/10 rounded-xl cursor-pointer hover:bg-white/10 h-7 pr-3 pl-3'
+          ? 'bg-white/40 rounded-xl cursor-pointer hover:bg-white/50 h-7 pr-3 pl-3 select-none'
+          : 'bg-white/10 rounded-xl cursor-pointer hover:bg-white/10 h-7 pr-3 pl-3 select-none'
       }
     >
       {genre}

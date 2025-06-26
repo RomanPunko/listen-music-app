@@ -34,7 +34,7 @@ const PlaylistSections: FC = () => {
   );
 
   return (
-    <div className="w-full flex flex-col gap-4">
+    <div className="w-full flex flex-col gap-4 select-none">
       <PlaylistsRow
         playlists={popularArtistsPlaylists}
         category={popularArtistsPlaylists.find((playlist) => playlist.category)?.category || ''}
