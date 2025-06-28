@@ -5,6 +5,7 @@ import { getPlaylists } from '@/store/slices/playlists-data-slice';
 import { LoadingSpinner } from '@/components/ui/spinner';
 import { IoIosPlay } from 'react-icons/io';
 import { getSongs } from '@/store/slices/songs-data-slice';
+import SongsList from '@/components/songs/SongsList';
 
 const PlaylistPage: FC = () => {
   const dispatch = useAppDispatch();
@@ -43,7 +44,7 @@ const PlaylistPage: FC = () => {
 
   return (
     <div className="w-full overflow-y-auto pb-[80px] pt-2 h-full select-none">
-      <div className=" border-b border-border/30 flex gap-6 text-3xl pb-4">
+      <div className=" flex gap-6 text-3xl pb-2">
         <div className="relative">
           <img
             src={playlist.avatar}
@@ -56,11 +57,7 @@ const PlaylistPage: FC = () => {
           <div className="text-5xl font-bold">{playlist.artist}</div>
         </div>
       </div>
-      <div className="pt-2">
-        {playlistSongs.map((song) =>(
-          <div>{song.name}</div>
-        ))}
-      </div>
+      <SongsList songsList= {playlistSongs}/>
     </div>
   );
 };
