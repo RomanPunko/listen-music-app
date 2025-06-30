@@ -16,7 +16,7 @@ const initialState: ISongPlayingState = {
   currentSong: undefined,
   currentSongsList: [],
   isPlaying: false,
-  volume: 20,
+  volume: 30,
   currentTime: 0,
   duration: 0.001,
   pausedTime: 0,

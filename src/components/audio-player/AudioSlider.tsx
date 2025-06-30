@@ -41,7 +41,6 @@ const AudioSlider: FC = () => {
       <p className="text-xs mr-2 opacity-60">{formatTime(currentTime)}</p>
       <Slider
         value={[progress]}
-        defaultValue={[0]}
         max={100}
         step={0.1}
         className="w-[400px] cursor-pointer"

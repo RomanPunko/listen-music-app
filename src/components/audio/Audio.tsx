@@ -1,4 +1,4 @@
-import { type FC, useRef, useEffect } from 'react';
+import { type FC, useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '@/hooks/app-hooks';
 import { nextSong } from '@/store/slices/audio-slice';
 import { useAudioRef } from '../context/AudioContext';
