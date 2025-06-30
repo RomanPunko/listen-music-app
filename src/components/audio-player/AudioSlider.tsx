@@ -3,7 +3,7 @@ import { Slider } from '@/components/ui/slider';
 import { useAppSelector, useAppDispatch } from '@/hooks/app-hooks';
 import { setCurrentTime, setDuration } from '@/store/slices/audio-slice';
 import { formatTime } from '@/utils/helpers';
-import { useAudioRef } from '../context/AudioContext';
+import { useAudioRef } from '../../context/AudioContext';
 
 const AudioSlider: FC = () => {
   const dispatch = useAppDispatch();

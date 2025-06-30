@@ -3,7 +3,7 @@ import { Slider } from '@/components/ui/slider';
 import { FaVolumeUp } from 'react-icons/fa';
 import { FaVolumeMute } from 'react-icons/fa';
 import { useAppDispatch, useAppSelector } from '@/hooks/app-hooks';
-import { useAudioRef } from '../context/AudioContext';
+import { useAudioRef } from '../../context/AudioContext';
 import { setVolume } from '@/store/slices/audio-slice';
 
 const VolumeControl: FC = () => {

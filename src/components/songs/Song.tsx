@@ -12,7 +12,7 @@ interface ISongProps {
   songsList: ISong[];
 }
 
-const SongsList: FC<ISongProps> = ({ song, songsList }) => {
+const Song: FC<ISongProps> = ({ song, songsList }) => {
   const dispatch = useAppDispatch();
   const isPlaying = useAppSelector((state) => state.audio.isPlaying);
   const currentSong = useAppSelector((state) => state.audio.currentSong);
@@ -53,4 +53,4 @@ const SongsList: FC<ISongProps> = ({ song, songsList }) => {
   );
 };
 
-export default SongsList;
+export default Song;
