@@ -10,12 +10,12 @@ import SongsList from '@/components/songs/SongsList';
 const PlaylistPage: FC = () => {
   const dispatch = useAppDispatch();
   const { id } = useParams() as { id: string };
-  const playlists = useAppSelector((state) => state.playlist.playlists);
-  const playlistsLoading = useAppSelector((state) => state.playlist.loading);
-  const playlistsError = useAppSelector((state) => state.playlist.error);
-  const songs = useAppSelector((state) => state.song.songs);
-  const songsLoading = useAppSelector((state) => state.song.loading);
-  const songsError = useAppSelector((state) => state.song.error);
+  const playlists = useAppSelector((state) => state.playlists.playlists);
+  const playlistsLoading = useAppSelector((state) => state.playlists.loading);
+  const playlistsError = useAppSelector((state) => state.playlists.error);
+  const songs = useAppSelector((state) => state.songs.songs);
+  const songsLoading = useAppSelector((state) => state.songs.loading);
+  const songsError = useAppSelector((state) => state.songs.error);
 
   useEffect(() => {
     dispatch(getPlaylists());
@@ -40,7 +40,10 @@ const PlaylistPage: FC = () => {
 
   if (!playlist) return <p>Плейлист не знайдено</p>;
 
-  const playlistSongs = songs.filter((song) => song.artist == playlist.artist)
+  const playlistSongs =
+    playlist.category == 'popular artists'
+      ? songs.filter((song) => song.artist == playlist.artist)
+      : songs.filter((song) => song.genre == playlist.genre);
 
   return (
     <div className="w-full overflow-y-auto pb-[80px] pt-2 h-full select-none">
@@ -57,7 +60,7 @@ const PlaylistPage: FC = () => {
           <div className="text-5xl font-bold">{playlist.artist}</div>
         </div>
       </div>
-      <SongsList songsList= {playlistSongs}/>
+      <SongsList songsList={playlistSongs} />
     </div>
   );
 };

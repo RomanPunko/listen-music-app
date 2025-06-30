@@ -30,7 +30,7 @@ const SongsList: FC<ISongsListProps> = ({songsList}) => {
         </TableHeader>
         <TableBody>
           {songsList.map((song) => (
-            <Song song={song} key={song.id}/>
+            <Song song={song} songsList={songsList} key={song.id}/>
           ))}
         </TableBody>
       </Table>

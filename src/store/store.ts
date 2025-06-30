@@ -1,12 +1,14 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import authReducer from './slices/auth-slice';
-import playlistReducer from './slices/playlists-data-slice';
-import songReducer from './slices/songs-data-slice';
+import playlistsDataReducer from './slices/playlists-data-slice';
+import songsDataReducer from './slices/songs-data-slice';
+import audioSlice from './slices/audio-slice';
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  playlist: playlistReducer,
-  song: songReducer,
+  playlists: playlistsDataReducer,
+  songs: songsDataReducer,
+  audio: audioSlice,
 });
 
 export const setupStore = () => {

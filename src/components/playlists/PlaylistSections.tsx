@@ -6,7 +6,7 @@ import { LoadingSpinner } from '../ui/spinner';
 
 const PlaylistSections: FC = () => {
   const dispatch = useAppDispatch();
-  const { playlists, loading, error } = useAppSelector((state) => state.playlist);
+  const { playlists, loading, error } = useAppSelector((state) => state.playlists);
 
   useEffect(() => {
     dispatch(getPlaylists());

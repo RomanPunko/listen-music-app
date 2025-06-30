@@ -3,7 +3,7 @@ import AppRouters from './routers/AppRouters';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { setupStore } from './store/store';
-
+import { AudioProvider } from './components/context/AudioContext';
 
 const store = setupStore();
 
@@ -11,9 +11,11 @@ function App() {
   return (
     <>
       <Provider store={store}>
-        <BrowserRouter>
-          <AppRouters />
-        </BrowserRouter>
+        <AudioProvider>
+          <BrowserRouter>
+            <AppRouters />
+          </BrowserRouter>
+        </AudioProvider>
       </Provider>
     </>
   );
