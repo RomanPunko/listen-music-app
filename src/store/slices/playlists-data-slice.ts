@@ -9,7 +9,7 @@ export const getPlaylists = createAsyncThunk<IAllPlaylists, void, { rejectValue:
       const response = await PlaylistService();
       return response.data;
     } catch (error: any) {
-      return rejectWithValue(error.response?.data?.message || 'Помилка отримання плейлистів');
+      return rejectWithValue(error.response?.data?.message || 'Error');
     }
   }
 );

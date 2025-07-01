@@ -9,7 +9,6 @@ interface ISongPlayingState{
   currentTime: number,
   duration: number,
   pausedTime: number,
-  // isLikedSong: any,
 }
 
 const initialState: ISongPlayingState = {
@@ -20,7 +19,6 @@ const initialState: ISongPlayingState = {
   currentTime: 0,
   duration: 0.001,
   pausedTime: 0,
-  // isLikedSong: null,
 };
 
 export const audioSlice = createSlice({
@@ -79,9 +77,6 @@ export const audioSlice = createSlice({
         state.currentTime = 0;
       }
     },
-    // toggleLike: (state, action) => {
-    //   state.isLikedSong = action.payload;
-    // },
   },
 });
 

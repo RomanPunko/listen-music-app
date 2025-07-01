@@ -10,3 +10,11 @@ export interface ISong {
 }
 
 export type IAllSongs = ISong[];
+
+export interface IFavSong {
+  id: string;
+  song: ISong;
+  songId: string;
+  userId: string;
+}
+

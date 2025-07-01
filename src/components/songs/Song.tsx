@@ -4,33 +4,35 @@ import { TableCell, TableRow } from '@/components/ui/table';
 import { IoIosPlay } from 'react-icons/io';
 import { IoPause } from 'react-icons/io5';
 import { MdFavoriteBorder } from 'react-icons/md';
-import { useAppDispatch, useAppSelector } from '@/hooks/app-hooks';
-import { play, pause } from '@/store/slices/audio-slice';
+import { MdFavorite } from 'react-icons/md';
 
 interface ISongProps {
   song: ISong;
-  songsList: ISong[];
+  togglePlayPause: (song: ISong) => void;
+  toggleLike: (song: ISong, event: React.MouseEvent) => void;
+  isLikedSongs: boolean;
+  loadingSongLike: string | null;
+  currentSong: ISong | undefined;
+  isPlaying: boolean;
 }
 
-const Song: FC<ISongProps> = ({ song, songsList }) => {
-  const dispatch = useAppDispatch();
-  const isPlaying = useAppSelector((state) => state.audio.isPlaying);
-  const currentSong = useAppSelector((state) => state.audio.currentSong);
+const Song: FC<ISongProps> = ({
+  song,
+  togglePlayPause,
+  toggleLike,
+  isLikedSongs,
+  loadingSongLike,
+  currentSong,
+  isPlaying,
+}) => {
 
-  const togglePlayPause = () => {
-    if (currentSong?.id === song?.id && isPlaying) {
-      dispatch(pause());
-    } else {
-      dispatch(play({ song: song, songsList: songsList }));
-    }
-  };
 
   return (
     <TableRow
       className={`w-full border-b border-t border-border/30 hover:bg-white/10 cursor-pointer ${
         currentSong?.id === song.id ? 'bg-white/10' : ''
       }`}
-      onClick={togglePlayPause}
+      onClick={() => togglePlayPause(song)}
     >
       <TableCell>
         {currentSong?.id === song?.id && isPlaying ? (
@@ -47,7 +49,13 @@ const Song: FC<ISongProps> = ({ song, songsList }) => {
       <TableCell>{song.listens}</TableCell>
       <TableCell>{song.time}</TableCell>
       <TableCell>
-        <MdFavoriteBorder size={26} />
+        {loadingSongLike === song.id ? (
+          <div className="animate-spin w-6 h-6 border-2 border-white border-t-transparent rounded-full" />
+        ) : isLikedSongs ? (
+          <MdFavorite size={26} onClick={(event) => toggleLike(song, event)} />
+        ) : (
+          <MdFavoriteBorder size={26} onClick={(event) => toggleLike(song, event)} />
+        )}
       </TableCell>
     </TableRow>
   );

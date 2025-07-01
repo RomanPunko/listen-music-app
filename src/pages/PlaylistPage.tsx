@@ -5,6 +5,7 @@ import { getPlaylists } from '@/store/slices/playlists-data-slice';
 import { LoadingSpinner } from '@/components/ui/spinner';
 import { IoIosPlay } from 'react-icons/io';
 import { getSongs } from '@/store/slices/songs-data-slice';
+import { getFavoriteSongs } from '@/store/slices/favorites-songs-slice';
 import SongsList from '@/components/songs/SongsList';
 
 const PlaylistPage: FC = () => {
@@ -20,6 +21,7 @@ const PlaylistPage: FC = () => {
   useEffect(() => {
     dispatch(getPlaylists());
     dispatch(getSongs());
+
   }, [dispatch]);
 
   if (playlistsLoading || songsLoading)
