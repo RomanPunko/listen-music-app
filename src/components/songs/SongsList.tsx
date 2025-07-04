@@ -89,22 +89,30 @@ const SongsList: FC<ISongListProps> = ({ playlist }) => {
 
   return (
     <div>
-      <Table className="text-[16px] text-text border-b border-border/30">
-        <TableHeader>
-          <TableRow className="border-b border-border/30">
-            <TableHead className="w-[32px]"></TableHead>
-            <TableHead className="text-left">Avatar</TableHead>
-            <TableHead className="text-left">Name</TableHead>
-            <TableHead className="text-left">Artist</TableHead>
-            <TableHead className="text-left">Listens</TableHead>
-            <TableHead className="text-left">Time</TableHead>
-            <TableHead className="text-left">Fav</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {location.pathname === '/favorite' ? renderSongs(favorites) : renderSongs(playlistSongs)}
-        </TableBody>
-      </Table>
+      {location.pathname === '/favorite' && favorites.length === 0 ? (
+        <div className="w-full flex items-center justify-center py-16 text-text-light text-lg rounded-md bg-white/5">
+          You don't have any saved tracks yet
+        </div>
+      ) : (
+        <Table className="text-[16px] text-text border-b border-border/30">
+          <TableHeader>
+            <TableRow className="border-b border-border/30">
+              <TableHead className="w-[32px]"></TableHead>
+              <TableHead className="text-left">Avatar</TableHead>
+              <TableHead className="text-left">Name</TableHead>
+              <TableHead className="text-left">Artist</TableHead>
+              <TableHead className="text-left">Listens</TableHead>
+              <TableHead className="text-left">Time</TableHead>
+              <TableHead className="text-left">Fav</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {location.pathname === '/favorite'
+              ? renderSongs(favorites)
+              : renderSongs(playlistSongs)}
+          </TableBody>
+        </Table>
+      )}
     </div>
   );
 };
