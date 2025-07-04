@@ -8,6 +8,7 @@ import { play, pause } from '@/store/slices/audio-slice';
 import { getFavoriteSongs, toggleFavoriteSong } from '@/store/slices/favorites-songs-slice';
 import { LoadingSpinner } from '../ui/spinner';
 import { getSongs } from '@/store/slices/songs-data-slice';
+import { getSongsByGenres } from '../genre-filters/GenreFilters';
 import type { IPlaylist } from '@/api/data-types/playlist-data-types';
 
 interface ISongListProps {
@@ -24,6 +25,7 @@ const SongsList: FC<ISongListProps> = ({ playlist }) => {
   const songsLoading = useAppSelector((state) => state.songs.loading);
   const songsError = useAppSelector((state) => state.songs.error);
   const favoriteIds = useAppSelector((state) => state.favorites.favoriteIds);
+  const currentGenre = useAppSelector((state) => state.genre.currentGenre);
 
   const [loadingSongLike, setLoadingSongLike] = useState<string | null>(null);
 
@@ -108,7 +110,7 @@ const SongsList: FC<ISongListProps> = ({ playlist }) => {
           </TableHeader>
           <TableBody>
             {location.pathname === '/favorite'
-              ? renderSongs(favorites)
+              ? renderSongs(getSongsByGenres(favorites, currentGenre))
               : renderSongs(playlistSongs)}
           </TableBody>
         </Table>

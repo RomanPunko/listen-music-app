@@ -4,6 +4,7 @@ import playlistsDataReducer from './slices/playlists-data-slice';
 import songsDataReducer from './slices/songs-data-slice';
 import audioSlice from './slices/audio-slice';
 import favoritesSlice from './slices/favorites-songs-slice'
+import  genreFiltersSlice from './slices/genre-filters-slice';
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   songs: songsDataReducer,
   audio: audioSlice,
   favorites: favoritesSlice,
+  genre: genreFiltersSlice,
 });
 
 export const setupStore = () => {

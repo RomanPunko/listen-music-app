@@ -64,7 +64,7 @@ const favoritesSlice = createSlice({
         state.loading = false;
 
         if (!action.payload || !action.payload.id) return;
-        if (state.favorites.some((song) => song.id === action.payload.id)) {
+        if (state.favorites.find((song) => song.id === action.payload.id)) {
           state.favorites = state.favorites.filter((song) => song.id !== action.payload.id);
         } else {
           state.favorites = [...state.favorites, action.payload];
