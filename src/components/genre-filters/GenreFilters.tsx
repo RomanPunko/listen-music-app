@@ -3,6 +3,7 @@ import GenreFiltersItem from './GenreFilterItem';
 import { useAppDispatch, useAppSelector } from '@/hooks/app-hooks';
 import { setGenre } from '@/store/slices/genre-filters-slice';
 import type { IAllSongs } from '@/api/data-types/songs-data-types';
+import type { IAllPlaylists } from '@/api/data-types/playlist-data-types';
 
 const GENRES = ['Rock', 'Pop', 'Rap', 'Hip-Hop', 'Jazz', 'Classical', 'Country'];
 
@@ -11,6 +12,13 @@ export const getSongsByGenres = (songs: IAllSongs, currentGenre: string[]) => {
     return songs;
   }
   return songs.filter((song) => currentGenre.includes(song.genre));
+};
+
+export const getPlaylistByGenres = (playlists: IAllPlaylists, currentGenre: string[]) => {
+  if (currentGenre.length === 0) {
+    return playlists;
+  }
+  return playlists.filter((playlist) => currentGenre.includes(playlist.genre));
 };
 
 const GenreFilters: FC = () => {
