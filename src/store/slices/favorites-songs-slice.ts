@@ -30,12 +30,14 @@ export const getFavoriteSongs = createAsyncThunk<ISong[], void, { rejectValue: s
 
 interface IFavoritesState {
   favorites: ISong[];
+  favoriteIds: string[];
   loading: boolean;
   error: string | null;
 }
 
 const initialState: IFavoritesState = {
   favorites: [],
+  favoriteIds: [],
   loading: false,
   error: null,
 };
@@ -46,6 +48,8 @@ const favoritesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+    
+    // pending
       .addCase(toggleFavoriteSong.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -55,24 +59,27 @@ const favoritesSlice = createSlice({
         state.error = null;
       })
 
+    // fulfilled
       .addCase(toggleFavoriteSong.fulfilled, (state, action: PayloadAction<ISong>) => {
         state.loading = false;
 
-        if (!action.payload || !action.payload.id) {
-          return;
-        }
+        if (!action.payload || !action.payload.id) return;
         if (state.favorites.some((song) => song.id === action.payload.id)) {
           state.favorites = state.favorites.filter((song) => song.id !== action.payload.id);
         } else {
           state.favorites = [...state.favorites, action.payload];
         }
+        state.favoriteIds = state.favorites.map(song => song.id);
       })
       .addCase(getFavoriteSongs.fulfilled, (state, action: PayloadAction<ISong[]>) => {
         state.loading = false;
 
         state.favorites = action.payload;
+        state.favoriteIds = action.payload.map(song => song.id);
       })
 
+
+    // rejected
       .addCase(toggleFavoriteSong.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || 'Error';

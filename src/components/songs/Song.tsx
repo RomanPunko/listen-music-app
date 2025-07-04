@@ -32,11 +32,7 @@ const Song: FC<ISongProps> = ({
     onClick={onPlayPause}
   >
     <TableCell>
-      {isCurrent && isPlaying ? (
-        <IoPause size={32} />
-      ) : (
-        <IoIosPlay size={32} />
-      )}
+      {isCurrent && isPlaying ? <IoPause size={32} /> : <IoIosPlay size={32} />}
     </TableCell>
     <TableCell>
       <img src={song.avatar} alt="" className="w-10 h-10 rounded-sm" />

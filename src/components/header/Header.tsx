@@ -1,7 +1,6 @@
 import { type FC } from 'react';
 import { Input } from '@/components/ui/input';
 import { IoSearchSharp } from 'react-icons/io5';
-import { LuCast } from 'react-icons/lu';
 import UserMenu from './UserMenu';
 
 const Header: FC = () => {
@@ -12,11 +11,7 @@ const Header: FC = () => {
         placeholder="What do you want to play?"
       />
       <IoSearchSharp className="absolute left-6 top-1/2 -translate-y-1/2 text-white/60" />
-      <div className="flex items-center gap-3 ">
-        <LuCast
-          size={36}
-          className="stroke-[1.5px] p-1.5 hover:bg-white/10 hover:rounded-[10px] cursor-pointer"
-        />
+      <div className="mr-4">
         <UserMenu />
       </div>
     </div>

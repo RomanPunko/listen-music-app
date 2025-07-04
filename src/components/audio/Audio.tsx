@@ -1,29 +1,34 @@
 import { type FC, useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '@/hooks/app-hooks';
 import { nextSong } from '@/store/slices/audio-slice';
-import { useAudioRef } from '../../context/AudioContext';
+import { useAudioController } from '@/context/AudioContext';
 
 const Audio: FC = () => {
   const dispatch = useAppDispatch();
-  const audioRef = useAudioRef();
+  const audio = useAudioController();
   const currentSong = useAppSelector((state) => state.audio.currentSong);
   const isPlaying = useAppSelector((state) => state.audio.isPlaying);
 
   useEffect(() => {
-    if (audioRef?.current && currentSong) {
-      audioRef.current.play();
+    if (audio && currentSong) {
+      audio.updateTime(0);
+      audio.play();
     }
   }, [currentSong]);
 
   useEffect(() => {
-    if (audioRef?.current) {
-      isPlaying ? audioRef.current.play() : audioRef.current.pause();
+    if (audio) {
+      isPlaying ? audio.play() : audio.pause();
     }
-  }, [isPlaying]);
+  }, [isPlaying, audio]);
 
   return (
     <>
-      <audio ref={audioRef} src={currentSong?.urlSong} onEnded={() => dispatch(nextSong())} />
+      <audio
+        ref={audio?.audioRef}
+        src={currentSong?.urlSong}
+        onEnded={() => dispatch(nextSong())}
+      />
     </>
   );
 };

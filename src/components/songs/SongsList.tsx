@@ -23,22 +23,14 @@ const SongsList: FC<ISongListProps> = ({ playlist }) => {
   const songs = useAppSelector((state) => state.songs.songs);
   const songsLoading = useAppSelector((state) => state.songs.loading);
   const songsError = useAppSelector((state) => state.songs.error);
+  const favoriteIds = useAppSelector((state) => state.favorites.favoriteIds);
 
   const [loadingSongLike, setLoadingSongLike] = useState<string | null>(null);
-  const [likedSongs, setLikedSongs] = useState<{ [id: string]: boolean }>({});
 
   useEffect(() => {
     dispatch(getSongs());
     dispatch(getFavoriteSongs());
   }, [dispatch]);
-
-  useEffect(() => {
-    const liked: { [id: string]: boolean } = {};
-    favorites.forEach((song) => {
-      liked[song.id] = true;
-    });
-    setLikedSongs(liked);
-  }, [favorites]);
 
   if (songsLoading)
     return (
@@ -81,14 +73,14 @@ const SongsList: FC<ISongListProps> = ({ playlist }) => {
     }
   };
 
-  const renderSongs = (songsToRender: ISong[]) =>
-    songsToRender.map((song) => (
+  const renderSongs = (songs: ISong[]) =>
+    songs.map((song) => (
       <Song
         key={song.id}
         song={song}
         onPlayPause={() => handlePlayPause(song)}
         onLike={handleLike(song)}
-        isLiked={!!likedSongs[song.id]}
+        isLiked={favoriteIds.includes(song.id)}
         loadingLike={loadingSongLike === song.id}
         isCurrent={currentSong?.id === song.id}
         isPlaying={isPlaying}
@@ -110,9 +102,7 @@ const SongsList: FC<ISongListProps> = ({ playlist }) => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {location.pathname === '/favorite'
-            ? renderSongs(favorites)
-            : renderSongs(playlistSongs)}
+          {location.pathname === '/favorite' ? renderSongs(favorites) : renderSongs(playlistSongs)}
         </TableBody>
       </Table>
     </div>

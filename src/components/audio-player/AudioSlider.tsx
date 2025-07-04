@@ -1,36 +1,37 @@
-import { type FC, useEffect } from 'react';
+import { type FC, useEffect, useState } from 'react';
 import { Slider } from '@/components/ui/slider';
-import { useAppSelector, useAppDispatch } from '@/hooks/app-hooks';
-import { setCurrentTime, setDuration } from '@/store/slices/audio-slice';
 import { formatTime } from '@/utils/helpers';
-import { useAudioRef } from '../../context/AudioContext';
+import { useAudioController } from '../../context/AudioContext';
 
 const AudioSlider: FC = () => {
-  const dispatch = useAppDispatch();
-  const audioRef = useAudioRef();
-  const currentTime = useAppSelector((state) => state.audio.currentTime);
-  const duration = useAppSelector((state) => state.audio.duration);
+  const audio = useAudioController();
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
 
   useEffect(() => {
-    if (audioRef?.current) {
-      const updateTime = () => dispatch(setCurrentTime(audioRef.current?.currentTime));
-      audioRef.current.addEventListener('timeupdate', updateTime);
+    if (!audio?.audioRef.current) return;
 
-      const updateDuration = () => dispatch(setDuration(audioRef.current?.duration));
-      audioRef.current.addEventListener('loadedmetadata', updateDuration);
+    const updateTime = () => setCurrentTime(audio.getCurrentTime());
+    const updateDuration = () => setDuration(audio.getDuration());
 
-      return () => {
-        audioRef.current?.removeEventListener('timeupdate', updateTime);
-        audioRef.current?.removeEventListener('loadedmetadata', updateDuration);
-      };
-    }
-  }, [audioRef, dispatch]);
+    const audioEl = audio.audioRef.current;
+    audioEl.addEventListener('timeupdate', updateTime);
+    audioEl.addEventListener('loadedmetadata', updateDuration);
+
+    setCurrentTime(audio.getCurrentTime());
+    setDuration(audio.getDuration());
+
+    return () => {
+      audioEl.removeEventListener('timeupdate', updateTime);
+      audioEl.removeEventListener('loadedmetadata', updateDuration);
+    };
+  }, [audio]);
 
   const handleSliderChange = (value: number[]) => {
-    if (audioRef?.current && duration) {
+    if (audio && duration) {
       const newTime = (value[0] / 100) * duration;
-      audioRef.current.currentTime = newTime;
-      dispatch(setCurrentTime(newTime));
+      audio.updateTime(newTime);
+      setCurrentTime(newTime);
     }
   };
 
