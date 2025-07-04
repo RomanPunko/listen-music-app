@@ -8,6 +8,7 @@ export const toggleFavoriteSong = createAsyncThunk<ISong, string, { rejectValue:
   async (songId, { rejectWithValue }) => {
     try {
       const data = await toggleFavoriteSongService(songId);
+
       return data.song;
     } catch (error: any) {
       return rejectWithValue(error.response?.data?.message || 'Error');
@@ -57,15 +58,19 @@ const favoritesSlice = createSlice({
       .addCase(toggleFavoriteSong.fulfilled, (state, action: PayloadAction<ISong>) => {
         state.loading = false;
 
-        state.favorites = state.favorites.some((song) => song.id === action.payload.id)
-          ? state.favorites.filter((song) => song.id !== action.payload.id)
-          : [...state.favorites, action.payload];
+        if (!action.payload || !action.payload.id) {
+          return;
+        }
+        if (state.favorites.some((song) => song.id === action.payload.id)) {
+          state.favorites = state.favorites.filter((song) => song.id !== action.payload.id);
+        } else {
+          state.favorites = [...state.favorites, action.payload];
+        }
       })
       .addCase(getFavoriteSongs.fulfilled, (state, action: PayloadAction<ISong[]>) => {
         state.loading = false;
 
         state.favorites = action.payload;
-        console.log(state.favorites);
       })
 
       .addCase(toggleFavoriteSong.rejected, (state, action) => {
@@ -78,6 +83,5 @@ const favoritesSlice = createSlice({
       });
   },
 });
-
 
 export default favoritesSlice.reducer;

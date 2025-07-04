@@ -1,37 +1,79 @@
-import { type FC, useState } from 'react';
-import type { IAllSongs, ISong } from '@/api/data-types/songs-data-types';
+import { type FC, useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import type { ISong } from '@/api/data-types/songs-data-types';
 import Song from './Song';
 import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { useAppDispatch, useAppSelector } from '@/hooks/app-hooks';
 import { play, pause } from '@/store/slices/audio-slice';
-import {toggleFavoriteSong } from '@/store/slices/favorites-songs-slice';
+import { getFavoriteSongs, toggleFavoriteSong } from '@/store/slices/favorites-songs-slice';
+import { LoadingSpinner } from '../ui/spinner';
+import { getSongs } from '@/store/slices/songs-data-slice';
+import type { IPlaylist } from '@/api/data-types/playlist-data-types';
 
-interface ISongsListProps {
-  songsList: IAllSongs;
+interface ISongListProps {
+  playlist?: IPlaylist;
 }
 
-const SongsList: FC<ISongsListProps> = ({ songsList }) => {
+const SongsList: FC<ISongListProps> = ({ playlist }) => {
   const dispatch = useAppDispatch();
+  const location = useLocation();
   const isPlaying = useAppSelector((state) => state.audio.isPlaying);
   const currentSong = useAppSelector((state) => state.audio.currentSong);
   const favorites = useAppSelector((state) => state.favorites.favorites);
+  const songs = useAppSelector((state) => state.songs.songs);
+  const songsLoading = useAppSelector((state) => state.songs.loading);
+  const songsError = useAppSelector((state) => state.songs.error);
+
   const [loadingSongLike, setLoadingSongLike] = useState<string | null>(null);
+  const [likedSongs, setLikedSongs] = useState<{ [id: string]: boolean }>({});
 
+  useEffect(() => {
+    dispatch(getSongs());
+    dispatch(getFavoriteSongs());
+  }, [dispatch]);
 
-  const togglePlayPause = (song: ISong) => {
+  useEffect(() => {
+    const liked: { [id: string]: boolean } = {};
+    favorites.forEach((song) => {
+      liked[song.id] = true;
+    });
+    setLikedSongs(liked);
+  }, [favorites]);
+
+  if (songsLoading)
+    return (
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <LoadingSpinner />
+      </div>
+    );
+
+  if (songsError)
+    return (
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <p>ERROR</p>
+      </div>
+    );
+
+  const playlistSongs =
+    playlist?.category === 'popular artists'
+      ? songs.filter((song) => song.artist === playlist?.artist)
+      : songs.filter((song) => song.genre === playlist?.genre);
+
+  const handlePlayPause = (song: ISong) => {
     if (currentSong?.id === song?.id && isPlaying) {
       dispatch(pause());
     } else {
-      dispatch(play({ song: song, songsList: songsList }));
+      dispatch(play({ song: song, songsList: playlistSongs }));
     }
   };
 
-  const toggleLike = async (song: ISong, event: React.MouseEvent) => {
+  const handleLike = (song: ISong) => async (event: React.MouseEvent) => {
     event.stopPropagation();
     setLoadingSongLike(song.id);
 
     try {
       await dispatch(toggleFavoriteSong(song.id));
+      await dispatch(getFavoriteSongs());
     } catch (error) {
       console.error('Toggle favorite error:', error);
     } finally {
@@ -39,6 +81,19 @@ const SongsList: FC<ISongsListProps> = ({ songsList }) => {
     }
   };
 
+  const renderSongs = (songsToRender: ISong[]) =>
+    songsToRender.map((song) => (
+      <Song
+        key={song.id}
+        song={song}
+        onPlayPause={() => handlePlayPause(song)}
+        onLike={handleLike(song)}
+        isLiked={!!likedSongs[song.id]}
+        loadingLike={loadingSongLike === song.id}
+        isCurrent={currentSong?.id === song.id}
+        isPlaying={isPlaying}
+      />
+    ));
 
   return (
     <div>
@@ -48,25 +103,16 @@ const SongsList: FC<ISongsListProps> = ({ songsList }) => {
             <TableHead className="w-[32px]"></TableHead>
             <TableHead className="text-left">Avatar</TableHead>
             <TableHead className="text-left">Name</TableHead>
-            <TableHead className="text-leftr">Artist</TableHead>
+            <TableHead className="text-left">Artist</TableHead>
             <TableHead className="text-left">Listens</TableHead>
             <TableHead className="text-left">Time</TableHead>
             <TableHead className="text-left">Fav</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {songsList.map((song) => (
-            <Song
-              song={song}
-              togglePlayPause={togglePlayPause}
-              key={song.id}
-              toggleLike={toggleLike}
-              isLikedSongs={favorites.some(fav => fav.id === song.id)}
-              loadingSongLike={loadingSongLike}
-              currentSong={currentSong}
-              isPlaying={isPlaying}
-            />
-          ))}
+          {location.pathname === '/favorite'
+            ? renderSongs(favorites)
+            : renderSongs(playlistSongs)}
         </TableBody>
       </Table>
     </div>

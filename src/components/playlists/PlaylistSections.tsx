@@ -14,13 +14,13 @@ const PlaylistSections: FC = () => {
 
   if (loading)
     return (
-      <div className="absolute left-1/2 top-[150%] transform -translate-x-1/2 -translate-y-1/2">
+      <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
         <LoadingSpinner />
       </div>
     );
   if (error)
     return (
-      <div className="absolute left-1/2 top-[150%] transform -translate-x-1/2 -translate-y-1/2">
+      <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
         <p>ERROR</p>
       </div>
     );

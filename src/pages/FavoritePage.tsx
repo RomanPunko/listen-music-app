@@ -1,36 +1,27 @@
-import { type FC, useEffect } from 'react';
+import { useEffect, type FC } from 'react';
 import SongsList from '@/components/songs/SongsList';
+import GenreFilters from '@/components/genre-filters/GenreFilters';
 import { useAppSelector, useAppDispatch } from '@/hooks/app-hooks';
 import { getFavoriteSongs } from '@/store/slices/favorites-songs-slice';
-import { LoadingSpinner } from '@/components/ui/spinner';
-import GenreFilters from '@/components/genre-filters/GenreFilters';
 
 export const FavoritePage: FC = () => {
   const dispatch = useAppDispatch();
-  const { favorites, loading, error } = useAppSelector((state) => state.favorites);
+  const { favorites } = useAppSelector((state) => state.favorites);
 
   useEffect(() => {
     dispatch(getFavoriteSongs());
   }, [dispatch]);
 
-  if (loading)
-    return (
-      <div className="flex items-center justify-center h-screen w-full mt-[-50px]">
-        <LoadingSpinner />
-      </div>
-    );
-
-  if (error)
-    return (
-      <div className="flex items-center justify-center h-screen w-full mt-[-50px]">
-        <p>ERROR</p>
-      </div>
-    );
-
   return (
     <div className="pb-[80px]">
-      <GenreFilters/>
-      <SongsList songsList={favorites} />
+      <GenreFilters />
+      {favorites.length ? (
+        <SongsList />
+      ) : (
+        <div className="flex items-center justify-center h-full text-text-light text-2xl pt-10">
+          You don't have any saved tracks yet
+        </div>
+      )}
     </div>
   );
 };
