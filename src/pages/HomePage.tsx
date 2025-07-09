@@ -5,9 +5,8 @@ import PlaylistSections from '@/components/playlists/PlaylistSections';
 const HomePage: FC = () => {
 
   return (
-    <div className="w-full h-screen pb-[80px] relative ">
+    <div className="w-full min-h-screen pb-[80px] relative">
       <GenreFilters/>
-      {/* <FreePremiumBanner/> */}
       <PlaylistSections/>
     </div>
   );

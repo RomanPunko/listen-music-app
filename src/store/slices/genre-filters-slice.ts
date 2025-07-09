@@ -14,7 +14,7 @@ export const genreFiltersSlice = createSlice({
   reducers: {
     setGenre: (state, action) => {
       if (state.currentGenre.includes(action.payload)) {
-        state.currentGenre = state.currentGenre.filter((g) => g !== action.payload);
+        state.currentGenre = state.currentGenre.filter((item) => item !== action.payload);
       } else {
         state.currentGenre = [...state.currentGenre, action.payload];
       }

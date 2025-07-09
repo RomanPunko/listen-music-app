@@ -78,7 +78,6 @@ const favoritesSlice = createSlice({
         state.favoriteIds = action.payload.map(song => song.id);
       })
 
-
     // rejected
       .addCase(toggleFavoriteSong.rejected, (state, action) => {
         state.loading = false;

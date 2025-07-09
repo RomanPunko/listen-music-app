@@ -3,7 +3,6 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import RegistrationPage from '@/pages/RegistrationPage';
 import LoginPage from '@/pages/LoginPage';
 import HomePage from '@/pages/HomePage';
-import PremiumPage from '@/pages/PremiumPage';
 import FavoritePage from '@/pages/FavoritePage';
 import Layout from '@/components/layout/Layout';
 import PlaylistPage from '@/pages/PlaylistPage';
@@ -19,14 +18,6 @@ const AppRouters: FC = () => {
         element={
           <Layout>
             <HomePage />
-          </Layout>
-        }
-      />
-      <Route
-        path="/premium"
-        element={
-          <Layout>
-            <PremiumPage />
           </Layout>
         }
       />
