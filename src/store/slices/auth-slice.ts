@@ -1,5 +1,6 @@
 import { createSlice, type PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { AuthService } from '@/api/services/auth/auth-service';
+import { getAccessToken } from '@/api/services/auth/auth-helper';
 
 
 export interface IFormData {
@@ -13,7 +14,7 @@ export const loginUser = createAsyncThunk(
   async ({ email, password }: IFormData, { rejectWithValue }) => {
     try {
       const response = await AuthService.login(email, password);
-      return response;
+      return response.data;
     } catch (error: any) {
       return rejectWithValue(error.response?.data?.message || 'Login failed');
     }
@@ -25,12 +26,14 @@ export const registerUser = createAsyncThunk(
   async ({ email, password }: IFormData, { rejectWithValue }) => {
     try {
       const response = await AuthService.register(email, password);
-      return response;
+      return response.data;
     } catch (error: any) {
       return rejectWithValue(error.response?.data?.message || 'Registration failed');
     }
   }
 );
+
+const token = getAccessToken();
 
 interface IAuth {
   isAuthenticated: boolean;
@@ -39,7 +42,7 @@ interface IAuth {
 }
 
 const initialState: IAuth = {
-  isAuthenticated: false,
+  isAuthenticated: !!token,
   loading: false,
   error: null,
 };
@@ -78,7 +81,7 @@ export const authSlice = createSlice({
       //rejected
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = (action.payload as string) || 'Failed to register';
+        state.error = (action.payload as string) || 'Login failed';
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;

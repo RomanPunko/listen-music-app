@@ -6,35 +6,61 @@ import HomePage from '@/pages/HomePage';
 import FavoritePage from '@/pages/FavoritePage';
 import Layout from '@/components/layout/Layout';
 import PlaylistPage from '@/pages/PlaylistPage';
+import PrivateRoute from './PrivateRoute';
+import PublicRoute from './PublicRoute';
 
 const AppRouters: FC = () => {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/login" replace />} />
-      <Route path="/registration" element={<RegistrationPage />} />
-      <Route path="/login" element={<LoginPage />} />
+
+      {/* Public */}
+      <Route
+        path="/login"
+        element={
+          <PublicRoute>
+            <LoginPage />
+          </PublicRoute>
+        }
+      />
+      <Route
+        path="/registration"
+        element={
+          <PublicRoute>
+            <RegistrationPage />
+          </PublicRoute>
+        }
+      />
+
+      {/* Private */}
       <Route
         path="/home"
         element={
-          <Layout>
-            <HomePage />
-          </Layout>
+          <PrivateRoute>
+            <Layout>
+              <HomePage />
+            </Layout>
+          </PrivateRoute>
         }
       />
       <Route
         path="/favorite"
         element={
-          <Layout>
-            <FavoritePage />
-          </Layout>
+          <PrivateRoute>
+            <Layout>
+              <FavoritePage />
+            </Layout>
+          </PrivateRoute>
         }
       />
       <Route
         path="/playlist/:id"
         element={
-          <Layout>
-            <PlaylistPage />
-          </Layout>
+          <PrivateRoute>
+            <Layout>
+              <PlaylistPage />
+            </Layout>
+          </PrivateRoute>
         }
       />
     </Routes>

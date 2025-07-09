@@ -1,7 +1,6 @@
 import { type FC } from 'react';
 import SideBarItem from './SideBarItem';
 import { TiHome } from "react-icons/ti";
-import { FaCrown } from "react-icons/fa";
 import { MdFavorite } from "react-icons/md";
 
 const SideBar: FC = () => {
@@ -11,7 +10,6 @@ const SideBar: FC = () => {
       <div className="flex flex-col flex-grow">
         <SideBarItem to="/home" icon={TiHome} label="Home" />
         <SideBarItem to="/favorite" icon={MdFavorite} label="Favorites" />
-        <SideBarItem to="/premium" icon={FaCrown} label="Premium" />
       </div>
     </div>
   );
