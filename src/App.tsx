@@ -1,22 +1,19 @@
 import './styles/index.css';
 import AppRouters from './routers/AppRouters';
 import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { setupStore } from './store/store';
 import { AudioProvider } from './context/AudioContext';
-
-const store = setupStore();
+import useInitialization from './hooks/useInitalization';
 
 function App() {
+  useInitialization();
+
   return (
     <>
-      <Provider store={store}>
-        <AudioProvider>
-          <BrowserRouter>
-            <AppRouters />
-          </BrowserRouter>
-        </AudioProvider>
-      </Provider>
+      <AudioProvider>
+        <BrowserRouter>
+          <AppRouters />
+        </BrowserRouter>
+      </AudioProvider>
     </>
   );
 }

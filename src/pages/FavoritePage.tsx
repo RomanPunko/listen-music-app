@@ -4,7 +4,7 @@ import GenreFilters from '@/components/genre-filters/GenreFilters';
 
 export const FavoritePage: FC = () => {
   return (
-    <div className="pb-[80px]">
+    <div className="pb-[80px] select-none">
       <GenreFilters />
       <SongsList />
     </div>

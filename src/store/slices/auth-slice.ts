@@ -1,7 +1,5 @@
 import { createSlice, type PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { AuthService } from '@/api/services/auth/auth-service';
-import { getAccessToken } from '@/api/services/auth/auth-helper';
-
 
 export interface IFormData {
   email: string;
@@ -33,16 +31,16 @@ export const registerUser = createAsyncThunk(
   }
 );
 
-const token = getAccessToken();
-
 interface IAuth {
   isAuthenticated: boolean;
+  isInitialized: boolean;
   loading: boolean;
   error: string | null;
 }
 
 const initialState: IAuth = {
-  isAuthenticated: !!token,
+  isAuthenticated: false,
+  isInitialized: false,
   loading: false,
   error: null,
 };
@@ -53,6 +51,9 @@ export const authSlice = createSlice({
   reducers: {
     setIsAuthenticated: (state, action: PayloadAction<boolean>) => {
       state.isAuthenticated = action.payload;
+    },
+    setIsInitialized: (state, action: PayloadAction<boolean>) => {
+      state.isInitialized = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -90,5 +91,5 @@ export const authSlice = createSlice({
   },
 });
 
-export const { setIsAuthenticated } = authSlice.actions;
+export const { setIsAuthenticated, setIsInitialized } = authSlice.actions;
 export default authSlice.reducer;
