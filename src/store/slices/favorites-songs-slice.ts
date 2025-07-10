@@ -9,7 +9,7 @@ export const toggleFavoriteSong = createAsyncThunk<ISong, string, { rejectValue:
     try {
       const data = await toggleFavoriteSongService(songId);
 
-      return data.song;
+      return data.song || { id: songId };
     } catch (error: any) {
       return rejectWithValue(error.response?.data?.message || 'Error');
     }
@@ -48,8 +48,8 @@ const favoritesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-    
-    // pending
+
+      // pending
       .addCase(toggleFavoriteSong.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -59,7 +59,7 @@ const favoritesSlice = createSlice({
         state.error = null;
       })
 
-    // fulfilled
+      // fulfilled
       .addCase(toggleFavoriteSong.fulfilled, (state, action: PayloadAction<ISong>) => {
         state.loading = false;
 
@@ -69,16 +69,16 @@ const favoritesSlice = createSlice({
         } else {
           state.favorites = [...state.favorites, action.payload];
         }
-        state.favoriteIds = state.favorites.map(song => song.id);
+        state.favoriteIds = state.favorites.map((song) => song.id);
       })
       .addCase(getFavoriteSongs.fulfilled, (state, action: PayloadAction<ISong[]>) => {
         state.loading = false;
 
         state.favorites = action.payload;
-        state.favoriteIds = action.payload.map(song => song.id);
+        state.favoriteIds = action.payload.map((song) => song.id);
       })
 
-    // rejected
+      // rejected
       .addCase(toggleFavoriteSong.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || 'Error';

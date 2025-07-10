@@ -67,7 +67,6 @@ const SongsList: FC<ISongListProps> = ({ playlist }) => {
 
     try {
       await dispatch(toggleFavoriteSong(song.id));
-      await dispatch(getFavoriteSongs());
     } catch (error) {
       console.error('Toggle favorite error:', error);
     } finally {
