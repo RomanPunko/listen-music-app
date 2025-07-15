@@ -57,11 +57,6 @@ input:-webkit-autofill:active {
   opacity: 0;
 }
 
-/* .outline-text {
-  color: transparent;
-  -webkit-text-stroke: 0.6px #fff;
-} */
-
 .dark {
   --sidebar: hsl(240 5.9% 10%);
   --sidebar-foreground: hsl(240 4.8% 95.9%);
@@ -73,7 +68,6 @@ input:-webkit-autofill:active {
   --sidebar-ring: hsl(217.2 91.2% 59.8%);
 }
 
-/* Глобальний темний тонкий скролбар */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -93,7 +87,6 @@ input:-webkit-autofill:active {
   background-color: rgba(100, 100, 100, 0.8);
 }
 
-/* Firefox */
 * {
   scrollbar-width: thin;
   scrollbar-color: rgba(100, 100, 100, 0.5) transparent;

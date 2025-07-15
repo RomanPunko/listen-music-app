@@ -1,4 +1,4 @@
-import './styles/index.css';
+import './styles/config.css';
 import AppRouters from './routers/AppRouters';
 import { BrowserRouter } from 'react-router-dom';
 import { AudioProvider } from './context/AudioContext';
