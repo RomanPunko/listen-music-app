@@ -21,9 +21,11 @@ const Search: FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    dispatch(getSongs());
-    dispatch(getFavoriteSongs());
-  }, [dispatch]);
+    if (searchInput.length >= 3) {
+      dispatch(getSongs());
+      dispatch(getFavoriteSongs());
+    }
+  }, [dispatch, searchInput.length]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
