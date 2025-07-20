@@ -8,6 +8,7 @@ const Audio: FC = () => {
   const audio = useAudioController();
   const currentSong = useAppSelector((state) => state.audio.currentSong);
   const isPlaying = useAppSelector((state) => state.audio.isPlaying);
+  const repeatOneSong = useAppSelector((state) => state.audio.repeatOneSong); // ✅
 
   useEffect(() => {
     if (audio && currentSong) {
@@ -23,13 +24,18 @@ const Audio: FC = () => {
   }, [isPlaying, audio]);
 
   return (
-    <>
-      <audio
-        ref={audio?.audioRef}
-        src={currentSong?.urlSong}
-        onEnded={() => dispatch(nextSong())}
-      />
-    </>
+    <audio
+      ref={audio?.audioRef}
+      src={currentSong?.urlSong}
+      onEnded={() => {
+        if (repeatOneSong) {
+          audio?.updateTime(0);
+          audio?.play();
+        } else {
+          dispatch(nextSong());
+        }
+      }}
+    />
   );
 };
 

@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/hooks/app-hooks';
 import { getPlaylists } from '@/store/slices/playlists-data-slice';
 import { LoadingSpinner } from '@/components/ui/spinner';
-import { IoIosPlay } from 'react-icons/io';
 import SongsList from '@/components/songs/SongsList';
 
 const PlaylistPage: FC = () => {
@@ -33,7 +32,7 @@ const PlaylistPage: FC = () => {
 
   const playlist = playlists.find((p) => p.id === id);
 
-  if (!playlist) return <p>Плейлист не знайдено</p>;
+  if (!playlist) return <p>Playlist not found</p>;
 
   return (
     <div className="w-full overflow-y-auto pb-[80px] pt-2 h-full select-none">
@@ -46,7 +45,6 @@ const PlaylistPage: FC = () => {
           ></img>
         </div>
         <div className=" relative flex flex-col justify-end ">
-          <IoIosPlay className="absolute left-0 mb-12 bg-green-600 rounded-full w-15 h-15 p-3 cursor-pointer hover:bg-green-500" />
           <div className="text-5xl font-bold">{playlist.artist}</div>
         </div>
       </div>
