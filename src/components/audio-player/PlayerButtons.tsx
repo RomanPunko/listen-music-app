@@ -15,7 +15,7 @@ import {
 import { IoMdRepeat } from 'react-icons/io';
 import { MdRepeatOne } from 'react-icons/md';
 import { IoShuffle } from 'react-icons/io5';
-import { TbArrowsRight } from 'react-icons/tb';
+import { TbArrowsLeftRight } from "react-icons/tb";
 
 const PlayerButtons: FC = () => {
   const dispatch = useAppDispatch();
@@ -66,7 +66,7 @@ const PlayerButtons: FC = () => {
           className="p-1 fill-current cursor-pointer hover:bg-white/5 hover:rounded-[10px]"
         />
       ) : (
-        <TbArrowsRight
+        <TbArrowsLeftRight
           size={30}
           onClick={handleShuffleSongs}
           className="p-1 fill-current cursor-pointer  hover:bg-white/5 hover:rounded-[10px]"
