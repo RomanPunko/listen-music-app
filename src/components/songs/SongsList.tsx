@@ -80,20 +80,6 @@ const SongsList: FC<ISongListProps> = ({ playlist }) => {
     }
   };
 
-  const renderSongs = (songs: ISong[]) =>
-    songs.map((song) => (
-      <Song
-        key={song.id}
-        song={song}
-        onPlayPause={() => handlePlayPause(song)}
-        onLike={handleLike(song)}
-        isLiked={favoriteIds.includes(song.id)}
-        loadingLike={loadingSongLike === song.id}
-        isCurrent={currentSong?.id === song.id}
-        isPlaying={isPlaying}
-      />
-    ));
-
   return (
     <div>
       {isFavoritesPage && favorites.length === 0 ? (
@@ -114,7 +100,18 @@ const SongsList: FC<ISongListProps> = ({ playlist }) => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {renderSongs(activeSongsList)}
+            {activeSongsList.map((song) => (
+              <Song
+                key={song.id}
+                song={song}
+                onPlayPause={() => handlePlayPause(song)}
+                onLike={handleLike(song)}
+                isLiked={favoriteIds.includes(song.id)}
+                loadingLike={loadingSongLike === song.id}
+                isCurrent={currentSong?.id === song.id}
+                isPlaying={isPlaying}
+              />
+            ))}
           </TableBody>
         </Table>
       )}
