@@ -48,16 +48,22 @@ const SongsList: FC<ISongListProps> = ({ playlist }) => {
       </div>
     );
 
+  const isFavoritesPage = location.pathname === '/favorite';
+
   const playlistSongs =
     playlist?.category === 'popular artists'
       ? songs.filter((song) => song.artist === playlist?.artist)
       : songs.filter((song) => song.genre === playlist?.genre);
 
+  const activeSongsList = isFavoritesPage
+    ? getSongsByGenres(favorites, currentGenre)
+    : playlistSongs;
+
   const handlePlayPause = (song: ISong) => {
     if (currentSong?.id === song?.id && isPlaying) {
       dispatch(pause());
     } else {
-      dispatch(play({ song: song, songsList: playlistSongs }));
+      dispatch(play({ song, songsList: activeSongsList }));
     }
   };
 
@@ -90,7 +96,7 @@ const SongsList: FC<ISongListProps> = ({ playlist }) => {
 
   return (
     <div>
-      {location.pathname === '/favorite' && favorites.length === 0 ? (
+      {isFavoritesPage && favorites.length === 0 ? (
         <div className="w-full flex items-center justify-center py-16 text-text-light text-lg rounded-md bg-white/5">
           You don't have any saved tracks yet
         </div>
@@ -108,9 +114,7 @@ const SongsList: FC<ISongListProps> = ({ playlist }) => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {location.pathname === '/favorite'
-              ? renderSongs(getSongsByGenres(favorites, currentGenre))
-              : renderSongs(playlistSongs)}
+            {renderSongs(activeSongsList)}
           </TableBody>
         </Table>
       )}
