@@ -26,10 +26,7 @@ export const audioSlice = createSlice({
     play: (state, action) => {
       const { song, songsList } = action.payload;
       state.currentSong = song;
-
-      if (state.originalSongsList.length === 0) {
-        state.originalSongsList = songsList;
-      }
+      state.originalSongsList = songsList;
 
       if (state.shuffle) {
         state.currentSongsList = [...songsList].sort(() => Math.random() - 0.5);
