@@ -37,7 +37,7 @@ const RegistrationForm: FC = () => {
 
   return (
     <form
-      className="bg-white/5 backdrop-blur-md p-10 rounded-xl flex flex-col gap-5 shadow-lg max-w-sm w-[400px]"
+      className="bg-white/5 backdrop-blur-md p-10 rounded-xl flex flex-col gap-5 shadow-lg"
       onSubmit={handleSubmit(onSubmit)}
     >
       <h2 className="text-3xl font-bold text-center mb-4">Registration</h2>
