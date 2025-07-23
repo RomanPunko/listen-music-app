@@ -4,17 +4,20 @@ import { useAppSelector } from '@/hooks/app-hooks';
 const PlayerSongInfo: FC = () => {
   const currentSong = useAppSelector((state) => state.audio.currentSong);
 
+  if (!currentSong) return null;
+
   return (
-    <div className="flex items-center absolute top-1/2 left-4 -translate-y-1/2">
-      {currentSong && (
-        <>
-          <img src={currentSong.avatar} alt={currentSong.name} className="w-10 h-10 rounded-md" />
-          <div className="ml-5">
-            <div className="">{currentSong.name}</div>
-            <div className="">{currentSong.artist}</div>
-          </div>
-        </>
-      )}
+    <div className="bg-secondary w-screen absolute top-0 mt-[-15px] flex items-center md:w-auto md:bg-none md:mt-0 md:flex md:items-center md:absolute md:top-1/2 md:left-4 md:-translate-y-1/2">
+      <img
+        src={currentSong.avatar}
+        alt={currentSong.name}
+        className=" hidden md:block w-10 h-10 rounded-md"
+      />
+      <div className="ml-5 flex items-center gap-2 md:flex-col md:items-start md:gap-0">
+        <div className="font-semibold">{currentSong.name}</div>
+        <div className="md:hidden">-</div>
+        <div className="text-white/70"> {currentSong.artist}</div>
+      </div>
     </div>
   );
 };
