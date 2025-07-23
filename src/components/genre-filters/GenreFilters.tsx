@@ -30,7 +30,7 @@ const GenreFilters: FC = () => {
   };
 
   return (
-    <div className="flex gap-3 mb-2">
+    <div className="flex flex-wrap gap-3 mb-2">
       {GENRES.map((genre) => (
         <GenreFiltersItem
           key={genre}

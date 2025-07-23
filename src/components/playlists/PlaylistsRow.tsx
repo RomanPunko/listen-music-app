@@ -39,7 +39,7 @@ const PlaylistsRow: FC<IPlaylistsRowProps> = ({ playlists, category }) => {
           {filteredPlaylists?.map((item: IPlaylist) => (
             <CarouselItem
               key={item.id}
-              className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-[17%]"
+              className="basis-1/1 w-[20px] sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-[17%]"
             >
               <PlaylistCard playlist={item} />
             </CarouselItem>

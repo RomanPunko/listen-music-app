@@ -11,11 +11,11 @@ const AudioPlayer: FC = () => {
       <Audio />
       <div className="h-[70px] bg-secondary relative border-t-1 border-border/30 select-none">
         <PlayerSongInfo />
-        <div className="flex flex-col items-center justify-center ">
+        <div className="flex flex-col items-center justify-center">
           <PlayerButtons />
           <AudioSlider />
         </div>
-        <div className="absolute right-8 top-1/2 -translate-y-1/2">
+        <div className="absolute right-8 top-1/2 -translate-y-1/2 hidden md:block lg:block">
           <VolumeControl />
         </div>
       </div>

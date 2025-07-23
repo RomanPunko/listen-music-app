@@ -44,7 +44,7 @@ const AudioSlider: FC = () => {
         value={[progress]}
         max={100}
         step={0.1}
-        className="w-[400px] cursor-pointer"
+        className="w-[200px] lg:w-[400px] cursor-pointer"
         onValueChange={handleSliderChange}
       />
       <p className="text-xs ml-2 opacity-60">{formatTime(duration)}</p>

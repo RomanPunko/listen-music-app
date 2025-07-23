@@ -66,13 +66,13 @@ const Search: FC = () => {
   };
 
   return (
-    <div ref={containerRef} className="relative w-[400px]">
+    <div ref={containerRef} className="relative max-w-[350px] w-full">
       <Input
         onFocus={() => setIsFocused(true)}
         value={searchInput}
         onChange={(e) => setSearchInput(e.target.value)}
         className="rounded-4xl bg-white/10 border-0 focus-visible:ring-1 pl-8 text-white placeholder:text-gray-400"
-        placeholder="What do you want to play? (3 letters or more)"
+        placeholder="Search (3 letters or more)"
       />
 
       {isFocused && searchInput.length >= 3 && (
