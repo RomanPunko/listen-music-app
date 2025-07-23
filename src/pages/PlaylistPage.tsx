@@ -55,7 +55,7 @@ const PlaylistPage: FC = () => {
         <div className="relative">
           <img
             src={playlist.avatar}
-            className="w-[180px] h-[180px] rounded-lg object-cover select-none "
+            className="w-[120px] h-[120px] md:w-[180px] md:h-[180px] rounded-lg object-cover select-none "
             alt={playlist.name}
           ></img>
         </div>
@@ -88,7 +88,7 @@ const PlaylistPage: FC = () => {
               />
             )}
           </div>
-          <div className="text-5xl font-bold">{playlist.artist}</div>
+          <div className="text-3xl md:text-5xl font-bold">{playlist.artist}</div>
         </div>
       </div>
       <SongsList playlist={playlist} />

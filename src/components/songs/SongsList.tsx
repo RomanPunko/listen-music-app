@@ -88,14 +88,14 @@ const SongsList: FC<ISongListProps> = ({ playlist }) => {
         </div>
       ) : (
         <Table className="text-[16px] text-text border-b border-border/30">
-          <TableHeader>
+          <TableHeader className="hidden md:table-header-group">
             <TableRow className="border-b border-border/30">
               <TableHead className="w-[32px]"></TableHead>
               <TableHead className="text-left">Avatar</TableHead>
               <TableHead className="text-left">Name</TableHead>
               <TableHead className="text-left">Artist</TableHead>
-              <TableHead className="text-left">Listens</TableHead>
-              <TableHead className="text-left">Time</TableHead>
+              <TableHead className="text-left hidden md:table-cell">Listens</TableHead>
+              <TableHead className="text-left hidden md:table-cell">Time</TableHead>
               <TableHead className="text-left">Fav</TableHead>
             </TableRow>
           </TableHeader>

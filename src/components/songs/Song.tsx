@@ -31,17 +31,22 @@ const Song: FC<ISongProps> = ({
     }`}
     onClick={onPlayPause}
   >
-    <TableCell>
+    <TableCell className="hidden md:table-cell">
       {isCurrent && isPlaying ? <IoPause size={32} /> : <IoIosPlay size={32} />}
     </TableCell>
-    <TableCell>
-      <img src={song.avatar} alt="" className="w-10 h-10 rounded-sm" />
+    <TableCell className='w-10 md:w-auto'>
+      <img src={song.avatar} alt="" className="min-w-10 w-10 h-10 rounded-sm" />
     </TableCell>
-    <TableCell>{song.name}</TableCell>
-    <TableCell>{song.artist}</TableCell>
-    <TableCell>{song.listens}</TableCell>
-    <TableCell>{song.time}</TableCell>
     <TableCell>
+      <div className="flex flex-col">
+        <span className="font-medium truncate max-w-[170px]">{song.name}</span>
+        <span className="text-sm text-gray-400 md:hidden truncate max-w-[170px]">{song.artist}</span>
+      </div>
+    </TableCell>
+    <TableCell className="truncate hidden md:table-cell">{song.artist}</TableCell>
+    <TableCell className="hidden md:table-cell">{song.listens}</TableCell>
+    <TableCell className="hidden md:table-cell">{song.time}</TableCell>
+    <TableCell className='w-8 md:w-auto'>
       {loadingLike ? (
         <div className="animate-spin w-6 h-6 border-2 border-white border-t-transparent rounded-full" />
       ) : isLiked ? (

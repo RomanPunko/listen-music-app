@@ -14,9 +14,9 @@ const PlayerSongInfo: FC = () => {
         className=" hidden md:block w-10 h-10 rounded-md"
       />
       <div className="ml-5 flex items-center gap-2 md:flex-col md:items-start md:gap-0">
-        <div className="font-semibold">{currentSong.name}</div>
+        <div className="font-semibold truncate max-w-[150px] lg:max-w-full">{currentSong.name}</div>
         <div className="md:hidden">-</div>
-        <div className="text-white/70"> {currentSong.artist}</div>
+        <div className="text-white/70 truncate max-w-[120px] lg:max-w-full"> {currentSong.artist}</div>
       </div>
     </div>
   );
